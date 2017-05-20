@@ -1,3 +1,10 @@
 language: node_js
 node_js:
 - node
+deploy:
+  provider: npm
+  email: npmjs@solsort.com
+  api_key:
+    secure: Di6Q9OSw2CdcUzIFwD1bqnqVhYAYskeV77YMMmzf553j3cnfSJbli/UeJ3yv2FUJ9EPaAKB76h2y7wWFR2J9Way2QQnURwkMKNM5N0vXNkuWGf3+TYsrmsoMosXXMR0yoShHLlBNNiPHgBo3YebC4Mh674BH+AAXSg2nvd9sZb8owIDZW6ehL4XX6pcVZXX9D/M8j0T4D/T83qepFr5egH16Msb/MB9lHmMbiRiNQkUd+39CrjYPyRJsVzHDV6mSKwZfvnWLwS0A7mzC+9iY9JNQvfj08vX1uiRh3brqEv7Vj5A8+rwYyBON9SdD1F2VEvGl8HUFauM+0adey2Al+7C79HA7/OKm4SNsK3t07hKXQt8JXHnl0G9ng+8VoSH2YwuNt+JH7ZjRUZ3+MtAgBz50kqOSInhjB90LlKjieCr/BB7ncK5zkalymEHNLzSCUr6BV1S1yPAPEBmuywxvSYICRbE/gDPXL+wwHewoP1p7kJcQcYv3rAxrShJLAvRLkhYJ9PkRdAB6a59wQipxOjjrU5LyXlxCFKp9fyVxL2+X/dtz/QCQOl7s9G8kdp2t0QRMpueBgx8JJb6myCM7ctvUonB8fB7oz567dTt5fi40cFbsjT/eiTj00QALFRb8KpKm7ohR9QIMIK7Gf3aHL32EXhl+t//VGcY++7SO3eU=
+  on:
+    repo: solsort/openplatform
