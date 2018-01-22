@@ -22,6 +22,11 @@ var endpoints = [
   'user',
   'work'];
 
+var connectedFn;
+var connecting = new Promise(function(resolve, reject) {
+  connectedFn = resolve;
+});
+
 openplatform = {};
 /**
  * Create a new method, for an endpoint.
@@ -30,16 +35,13 @@ openplatform = {};
  */
 function endpoint(name) {
   return function(obj) {
-    var params = {access_token: apiToken};
-    for (var key in obj) if (obj.hasOwnProperty(key)) {
-      params[key] = obj[key];
-    }
-    var envelope = params.envelope;
-    delete params.envelope;
-    if (!this.connecting) {
-      return Promise.reject('need to connect before calling endpoint');
-    }
-    return this.connecting.then(function() {
+    return connecting.then(function() {
+      var params = {access_token: apiToken};
+      for (var key in obj) if (obj.hasOwnProperty(key)) {
+        params[key] = obj[key];
+      }
+      var envelope = params.envelope;
+      delete params.envelope;
       return new Promise(function(resolve, reject) {
         sc.emit(name, params, function(err, result) {
           if (err) {
@@ -99,7 +101,6 @@ openplatform.connect = function() {
     }
     promise = getToken(clientId, clientSecret, user, password);
   }
-  this.connecting = promise;
   return promise.then(function(token) {
     apiToken = token;
     return new Promise(function(resolve, reject) {
@@ -127,6 +128,7 @@ openplatform.connect = function() {
         reject(result);
       });
       sc.on('connect', function() {
+        connectedFn();
         resolve(token);
       });
     });
