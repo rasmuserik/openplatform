@@ -36,10 +36,11 @@ function endpoint(name) {
     }
     var envelope = params.envelope;
     delete params.envelope;
-    if (!this.connected()) {
+    if (!this.connecting) {
       return Promise.reject('need to connect before calling endpoint');
     }
-    return new Promise(function(resolve, reject) {
+    return this.connecting.then(function() {
+      return new Promise(function(resolve, reject) {
       sc.emit(name, params, function(err, result) {
         if (err) {
           return reject(err);
@@ -50,6 +51,7 @@ function endpoint(name) {
           resolve(envelope ? result : result.data);
         }
       });
+    });
     });
   };
 }
@@ -97,6 +99,7 @@ openplatform.connect = function() {
     }
     promise = getToken(clientId, clientSecret, user, password);
   }
+  this.connecting = promise;
   return promise.then(function(token) {
     apiToken = token;
     return new Promise(function(resolve, reject) {
