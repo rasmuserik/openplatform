@@ -41,17 +41,17 @@ function endpoint(name) {
     }
     return this.connecting.then(function() {
       return new Promise(function(resolve, reject) {
-      sc.emit(name, params, function(err, result) {
-        if (err) {
-          return reject(err);
-        }
-        if (!result.statusCode || result.statusCode !== 200) {
-          reject(result);
-        } else {
-          resolve(envelope ? result : result.data);
-        }
+        sc.emit(name, params, function(err, result) {
+          if (err) {
+            return reject(err);
+          }
+          if (!result.statusCode || result.statusCode !== 200) {
+            reject(result);
+          } else {
+            resolve(envelope ? result : result.data);
+          }
+        });
       });
-    });
     });
   };
 }
