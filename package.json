@@ -4,7 +4,7 @@
   "main": "openplatform.js",
   "unpkg": "dist.js",
   "repository": "github:solsort/openplatform",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "homepage": "http://openplatform.solsort.com",
   "description": "",
   "dependencies": {

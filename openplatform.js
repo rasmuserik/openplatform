@@ -120,6 +120,7 @@ openplatform.connect = function() {
       } 
       sc = require('socketcluster-client').connect({
         hostname: 'openplatform.dbc.dk', 
+        ackTimeout: 30000,
         port: 443,
         secure: true,
         path: '/v2/socketcluster/?access_token=' + token

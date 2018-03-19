@@ -5367,12 +5367,12 @@ openplatform = {};
 function endpoint(name) {
   return function(obj) {
     return connecting.then(function() {
-    var params = {access_token: apiToken};
-    for (var key in obj) if (obj.hasOwnProperty(key)) {
-      params[key] = obj[key];
-    }
-    var envelope = params.envelope;
-    delete params.envelope;
+      var params = {access_token: apiToken};
+      for (var key in obj) if (obj.hasOwnProperty(key)) {
+        params[key] = obj[key];
+      }
+      var envelope = params.envelope;
+      delete params.envelope;
       return new Promise(function(resolve, reject) {
         sc.emit(name, params, function(err, result) {
           if (err) {
@@ -5451,6 +5451,7 @@ openplatform.connect = function() {
       } 
       sc = require('socketcluster-client').connect({
         hostname: 'openplatform.dbc.dk', 
+        ackTimeout: 30000,
         port: 443,
         secure: true,
         path: '/v2/socketcluster/?access_token=' + token
