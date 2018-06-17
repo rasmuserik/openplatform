@@ -123,7 +123,7 @@ openplatform.connect = function() {
         ackTimeout: 30000,
         port: 443,
         secure: true,
-        path: '/v2/socketcluster/?access_token=' + token
+        path: '/v3/socketcluster/?access_token=' + token
       });
       sc.on('connectAbort', function(result) {
         reject(result);
